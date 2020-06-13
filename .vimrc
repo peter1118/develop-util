@@ -29,7 +29,8 @@ set background=dark
 
 "" 단축키 ""
 let mapleader = " "
-
+nnoremap  <silent>   <tab>  :if &modifiable && !&readonly && &modified <CR> :write<CR> :endif<CR>:bnext<CR> "버퍼 탭 이동
+nnoremap  <silent> <s-tab>  :if &modifiable && !&readonly && &modified <CR> :write<CR> :endif<CR>:bprevious<CR> "버퍼 탭 이전 이동
 
 """""""""""""""""""""""""""""""
 "ctrlp
