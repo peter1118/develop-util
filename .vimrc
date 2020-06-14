@@ -13,6 +13,7 @@ Plugin 'leafgarland/typescript-vim'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'jeetsukumaran/vim-buffergator'
+Plugin 'jiangmiao/auto-pairs'
 call vundle#end()            " 필수
 filetype plugin indent on    " 필수
 
