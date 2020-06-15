@@ -62,6 +62,7 @@ nmap <leader>bq :bp <BAR> bd #<CR>
 
 " 모든 버퍼와 각 버퍼 상태 출력
 nmap <leader>bl :ls<CR>
+map <F9> :w<CR> :! g++ % -o %:r</CR>
 
 """""""""""""""""""""""""""""""
 "ctrlp
