@@ -41,6 +41,11 @@ nnoremap <Leader>fq :q<CR>
 nnoremap <Leader>fq! :q!<CR>
 nnoremap <Leader>sv :vsplit<CR>
 nnoremap <Leader>sh :split<CR>
+map <F8> :w <CR> :!g++ % -o %< && ./%< <CR>
+nmap <C-h> :w <CR> <C-w>h
+nmap <C-l> :w <CR> <C-w>l
+nmap <C-j> :w <CR> <C-w>j
+nmap <C-k> :w <CR> <C-w>k
 """""""""""""""""""""""
 " 이 옵션은 버퍼를 수정한 직후 버퍼를 감춰지도록 한다.
 " 이 방법으로 버퍼를 사용하려면 거의 필수다.
@@ -62,7 +67,6 @@ nmap <leader>bq :bp <BAR> bd #<CR>
 
 " 모든 버퍼와 각 버퍼 상태 출력
 nmap <leader>bl :ls<CR>
-map <F9> :w<CR> :! g++ % -o %:r</CR>
 
 """""""""""""""""""""""""""""""
 "ctrlp
