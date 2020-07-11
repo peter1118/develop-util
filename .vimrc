@@ -14,6 +14,9 @@ Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'jeetsukumaran/vim-buffergator'
 Plugin 'jiangmiao/auto-pairs'
+Plugin 'prettier/vim-prettier', { 'do': 'yarn install' }
+Plugin 'pangloss/vim-javascript'
+Plugin 'MaxMEllon/vim-jsx-pretty'
 call vundle#end()            " 필수
 filetype plugin indent on    " 필수
 
@@ -41,11 +44,12 @@ nnoremap <Leader>fq :q<CR>
 nnoremap <Leader>fq! :q!<CR>
 nnoremap <Leader>sv :vsplit<CR>
 nnoremap <Leader>sh :split<CR>
-map <F8> :w <CR> :!g++ % -o %< && ./%< <CR>
 nmap <C-h> :w <CR> <C-w>h
 nmap <C-l> :w <CR> <C-w>l
 nmap <C-j> :w <CR> <C-w>j
 nmap <C-k> :w <CR> <C-w>k
+map <F8> :w <CR> :!g++ -std=c++11 % -o %< && ./%< <CR>
+map <F5> <Esc>:w<CR>:!clear;python %<CR>
 """""""""""""""""""""""
 " 이 옵션은 버퍼를 수정한 직후 버퍼를 감춰지도록 한다.
 " 이 방법으로 버퍼를 사용하려면 거의 필수다.
@@ -86,8 +90,15 @@ let g:ctrlp_working_path_mode = 'r'
 """""""""""""""""""""""""""""""
 "YCM
 """""""""""""""""""""""""""""""
-nnoremap <Leader>gd :YcmCompleter GoTo<CR>
+nnoremap <Leader>gd :YcmCompleter GoToDeclaration<CR>
+nnoremap <Leader>gr :YcmCompleter GoToReferences<CR>
+nnoremap <Leader>gt :YcmCompleter GoTo<CR>
 nnoremap <Leader>gf :YcmCompleter FixIt<CR>
+let g:ycm_autoclose_preview_window_after_insertion = 1
+let g:ycm_autoclose_preview_window_after_completion = 1
+" Don't show YCM's preview window [ I find it really annoying ]
+set completeopt-=preview
+let g:ycm_add_preview_to_completeopt = 0
 """""""""""""""""""""""""""""""
 "Air line
 """""""""""""""""""""""""""""""
@@ -112,3 +123,19 @@ nmap <leader>jj :BuffergatorMruCyclePrev<cr>
 
 " 다음 버퍼로 이동
 nmap <leader>kk :BuffergatorMruCycleNext<cr>
+
+"""""""""""""""""""""""""""""""
+"""* vim-prettier
+"""""""""""""""""""""""""""""""
+let g:prettier#autoformat = 0
+autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md,*.vue,*.yaml,*.html PrettierAsync
+
+"""""""""""""""""""""""""""""""
+""" vim-javascript
+"""""""""""""""""""""""""""""""
+let g:javascript_plugin_jsdoc = 1
+
+"""""""""""""""""""""""""""""""
+""" vim-jsx
+"""""""""""""""""""""""""""""""
+let g:vim_jsx_pretty_colorful_config = 1 " default 0
