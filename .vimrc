@@ -14,9 +14,9 @@ Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'jeetsukumaran/vim-buffergator'
 Plugin 'jiangmiao/auto-pairs'
-Plugin 'prettier/vim-prettier', { 'do': 'yarn install' }
 Plugin 'pangloss/vim-javascript'
-Plugin 'MaxMEllon/vim-jsx-pretty'
+Plugin 'adelarsq/vim-matchit'
+Plugin 'nathanaelkane/vim-indent-guides'
 call vundle#end()            " 필수
 filetype plugin indent on    " 필수
 
@@ -75,10 +75,11 @@ nmap <leader>bl :ls<CR>
 """""""""""""""""""""""""""""""
 "ctrlp
 """""""""""""""""""""""""""""""
+set wildignore+=*/tmp/*,*.so,*.swp,*.zip
 let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc']
-" 기본 무시 설정
+" 기본 무시 설정"
 let g:ctrlp_custom_ignore = {
-  \ 'dir':  '\v[\/](\.(git|hg|svn)|\_site)$',
+  \ 'dir':  '\v[\/](\.(node_modules|build|git|hg|svn)|\_site)$',
   \ 'file': '\v\.(exe|so|dll|class|png|jpg|jpeg)$',
 \}
 
@@ -127,8 +128,8 @@ nmap <leader>kk :BuffergatorMruCycleNext<cr>
 """""""""""""""""""""""""""""""
 """* vim-prettier
 """""""""""""""""""""""""""""""
-let g:prettier#autoformat = 0
-autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md,*.vue,*.yaml,*.html PrettierAsync
+"let g:prettier#autoformat = 1
+"#autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md,*.vue,*.yaml,*.html PrettierAsync
 
 """""""""""""""""""""""""""""""
 """ vim-javascript
@@ -139,3 +140,10 @@ let g:javascript_plugin_jsdoc = 1
 """ vim-jsx
 """""""""""""""""""""""""""""""
 let g:vim_jsx_pretty_colorful_config = 1 " default 0
+
+"""""""""""""""""""""""""""""""
+""" vim-indent-guideline
+"""""""""""""""""""""""""""""""
+nmap <leader>glen :IndentGuidesEnable<cr>
+let g:indent_guides_start_level = 2
+let g:indent_guides_guide_size = 1
