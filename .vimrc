@@ -17,6 +17,8 @@ Plugin 'jiangmiao/auto-pairs'
 Plugin 'pangloss/vim-javascript'
 Plugin 'adelarsq/vim-matchit'
 Plugin 'nathanaelkane/vim-indent-guides'
+Plugin 'scrooloose/nerdtree'
+Plugin 'SirVer/ultisnips'
 call vundle#end()            " 필수
 filetype plugin indent on    " 필수
 
@@ -75,8 +77,8 @@ nmap <leader>bl :ls<CR>
 """""""""""""""""""""""""""""""
 "ctrlp
 """""""""""""""""""""""""""""""
-set wildignore+=*/tmp/*,*.so,*.swp,*.zip
-let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc']
+"set wildignore+=*/tmp/*,*.so,*.swp,*.zip
+"let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc']
 " 기본 무시 설정"
 let g:ctrlp_custom_ignore = {
   \ 'dir':  '\v[\/](\.(node_modules|build|git|hg|svn)|\_site)$',
@@ -95,8 +97,11 @@ nnoremap <Leader>gd :YcmCompleter GoToDeclaration<CR>
 nnoremap <Leader>gr :YcmCompleter GoToReferences<CR>
 nnoremap <Leader>gt :YcmCompleter GoTo<CR>
 nnoremap <Leader>gf :YcmCompleter FixIt<CR>
+let g:ycm_key_list_select_completion = ['<C-n>']
+let g:ycm_key_list_previous_completion=['<C-p>']
 let g:ycm_autoclose_preview_window_after_insertion = 1
 let g:ycm_autoclose_preview_window_after_completion = 1
+let g:ycm_min_num_of_chars_for_completion = 1
 " Don't show YCM's preview window [ I find it really annoying ]
 set completeopt-=preview
 let g:ycm_add_preview_to_completeopt = 0
@@ -147,3 +152,19 @@ let g:vim_jsx_pretty_colorful_config = 1 " default 0
 nmap <leader>glen :IndentGuidesEnable<cr>
 let g:indent_guides_start_level = 2
 let g:indent_guides_guide_size = 1
+"""""""""""""""""""""""""""""""
+""" nerd tree
+"""""""""""""""""""""""""""""""
+nmap nerd :NERDTreeToggle<CR>
+
+"""""""""""""""""""""""""""""""
+""" ultisnips
+"""""""""""""""""""""""""""""""
+let g:UltiSnipsExpandTrigger="<Tab>"
+let g:UltiSnipsJumpForwardTrigger="<Tab>"
+let g:UltiSnipsJumpBackwardTrigger="<S-Tab>"
+let g:UltiSnipsEditSplit="vertical"
+let g:UltiSnipsSnippetDirectories = ['~/.vim/UltiSnips']
+"let g:UltiSnipsSnippetDirectories = ['UltiSnips']
+nmap snip :UltiSnipsEdit<CR>
+
