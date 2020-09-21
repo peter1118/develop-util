@@ -77,17 +77,14 @@ nmap <leader>bl :ls<CR>
 """""""""""""""""""""""""""""""
 "ctrlp
 """""""""""""""""""""""""""""""
-"set wildignore+=*/tmp/*,*.so,*.swp,*.zip
-"let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc']
-" 기본 무시 설정"
-let g:ctrlp_custom_ignore = {
-  \ 'dir':  '\v[\/](\.(node_modules|build|git|hg|svn)|\_site)$',
-  \ 'file': '\v\.(exe|so|dll|class|png|jpg|jpeg)$',
-\}
-
-" 가장 가까운 .git 디렉토리를 cwd(현재 작업 디렉토리)로 사용
-" 버전 관리를 사용하는 프로젝트를 할 때 꽤 적절하다.
-" .svn, .hg, .bzr도 지원한다.
+let g:ctrlp_working_path_mode = 'r'
+let g:ctrlp_by_filename = 1
+" 기본 무시 설정
+set wildignore+=*/.git/*,*.so,*.o,*.cc.o,*/out/*,*/pkg/*,*/bin/*,*/node_modules/*
+let g:ctrlp_custom_ignore={
+\ 'dir': '\v[\/](\.git\|build\|bin\|out)$',
+\ 'file': '\v\.(exe|so|dll|o|cc.o)$',
+\ }
 let g:ctrlp_working_path_mode = 'r'
 
 """""""""""""""""""""""""""""""
@@ -97,8 +94,8 @@ nnoremap <Leader>gd :YcmCompleter GoToDeclaration<CR>
 nnoremap <Leader>gr :YcmCompleter GoToReferences<CR>
 nnoremap <Leader>gt :YcmCompleter GoTo<CR>
 nnoremap <Leader>gf :YcmCompleter FixIt<CR>
-let g:ycm_key_list_select_completion = ['<C-n>']
-let g:ycm_key_list_previous_completion=['<C-p>']
+let g:ycm_key_list_select_completion = ['<C-j>']
+let g:ycm_key_list_previous_completion=['<C-k>']
 let g:ycm_autoclose_preview_window_after_insertion = 1
 let g:ycm_autoclose_preview_window_after_completion = 1
 let g:ycm_min_num_of_chars_for_completion = 1
