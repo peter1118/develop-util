@@ -26,7 +26,7 @@ syntax on
 
 set modifiable
 set noerrorbells
-set tabstop=4 softtabstop=4
+set tabstop=8 softtabstop=0 expandtab shiftwidth=4 smarttab
 set shiftwidth=4
 set smartindent
 set nu
