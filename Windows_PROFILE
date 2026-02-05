@@ -36,3 +36,60 @@ function goto {
 
 # 더 짧게 치고 싶으면 별칭도 추가
 Set-Alias gto goto
+
+###########################아래는 git##########
+
+# git 단축어 테이블(여기에 계속 추가)
+$global:GitShortcuts = [ordered]@{
+    s  = "status -sb"
+    a  = "add"
+    aa = "add -A"
+    c  = "commit"
+    cm = "commit -m"
+    co = "checkout"
+    b  = "branch"
+    d  = "diff"
+    l  = "log --oneline --decorate --graph -n 20"
+    p  = "push"
+    pf = "push --force-with-lease"
+    pl = "pull --rebase"
+}
+
+function g {
+    [CmdletBinding()]
+    param(
+        [Parameter(Position=0)]
+        [string]$Key,
+
+        [Parameter(ValueFromRemainingArguments=$true)]
+        [string[]]$Args
+    )
+
+    if (-not $Key) {
+        Write-Host "Usage: g <key> [args...]"
+        Write-Host ("Keys: " + ($global:GitShortcuts.Keys -join ", "))
+        return
+    }
+
+    $sub = $global:GitShortcuts[$Key]
+    if (-not $sub) {
+        Write-Host "Unknown git shortcut key: $Key"
+        Write-Host ("Keys: " + ($global:GitShortcuts.Keys -join ", "))
+        return
+    }
+
+    # 예: g cm "msg"  -> git commit -m "msg"
+    & git @($sub.Split(' ')) @Args
+}
+
+# gs, ga, gc ... 처럼 직접 호출 가능한 함수들을 자동 생성
+foreach ($k in $global:GitShortcuts.Keys) {
+    $fn = "g$k"  # 예: gs, gaa, gcm
+    if (-not (Get-Command $fn -ErrorAction SilentlyContinue)) {
+        Set-Item -Path "Function:\$fn" -Value ([scriptblock]::Create("param([Parameter(ValueFromRemainingArguments=`$true)][string[]]`$Args) g $k @Args"))
+    }
+}
+
+# 원하시는 정확한 요구: git status -> gs
+# 위 테이블에서 s가 status이므로 gs가 생성됩니다.
+
