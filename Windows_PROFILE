@@ -1,0 +1,38 @@
+function goto {
+    [CmdletBinding()]
+    param(
+        [Parameter(Position=0)]
+        [string]$Key
+    )
+
+    if (-not $Key) {
+        Write-Host "Usage: goto <key>"
+        Write-Host "Examples: goto dev, goto dl, goto proj"
+        return
+    }
+
+    $target = switch ($Key.ToLower()) {
+        # === 자주 쓰는 키/별칭들 ===
+        { $_ -in @("dev","d") }   { "C:\dev" ; break }
+        { $_ -in @("dl","down") } { "$env:USERPROFILE\Downloads" ; break }
+        { $_ -in @("desk","desktop") } { "$env:USERPROFILE\Desktop" ; break }
+
+        # === 프로젝트 예시 ===
+        { $_ -in @("proj","p") }  { "D:\work\projects" ; break }
+        "repo1" { "D:\work\projects\repo1" ; break }
+        "repo2" { "D:\work\projects\repo2" ; break }
+
+        default { $null }
+    }
+
+    if (-not $target) {
+        Write-Host "Unknown key: $Key"
+        Write-Host "Hint: add a case in switch inside function goto."
+        return
+    }
+
+    Set-Location -Path $target
+}
+
+# 더 짧게 치고 싶으면 별칭도 추가
+Set-Alias gto goto
