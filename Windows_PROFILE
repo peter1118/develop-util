@@ -82,6 +82,11 @@ function g {
     & git @($sub.Split(' ')) @Args
 }
 
+# gc는 기본적으로 Get-Content 별칭이라 충돌함 → 제거
+if (Get-Alias gc -ErrorAction SilentlyContinue) {
+    Remove-Item Alias:gc -Force
+}
+
 # gs, ga, gc ... 처럼 직접 호출 가능한 함수들을 자동 생성
 foreach ($k in $global:GitShortcuts.Keys) {
     $fn = "g$k"  # 예: gs, gaa, gcm
