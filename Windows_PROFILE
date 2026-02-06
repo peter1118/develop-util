@@ -98,3 +98,4 @@ foreach ($k in $global:GitShortcuts.Keys) {
 # 원하시는 정확한 요구: git status -> gs
 # 위 테이블에서 s가 status이므로 gs가 생성됩니다.
 
+function danger { claude --dangerously-skip-permissions @args }
